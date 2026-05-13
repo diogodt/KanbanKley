@@ -1,0 +1,507 @@
+@import "tailwindcss";
+
+:root {
+  --app-bg:
+    radial-gradient(circle at 15% -10%, rgba(50, 168, 130, 0.14), transparent 30%),
+    radial-gradient(circle at 85% 0%, rgba(238, 171, 77, 0.12), transparent 28%),
+    #0b0d10;
+  --text: #f4f0e8;
+  --muted: #8b918f;
+  --label: #747c79;
+  --placeholder: #616865;
+  --panel: rgba(17, 20, 24, 0.86);
+  --panel-soft: rgba(24, 28, 34, 0.92);
+  --field: rgba(7, 10, 12, 0.84);
+  --border: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --accent: #58c7a4;
+  --accent-hover: #70dfbd;
+  --accent-contrast: #07100d;
+  --danger: #e86f62;
+  --warning: #e6b04b;
+  --shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+  color: var(--text);
+  background: #0b0d10;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root[data-theme="light"] {
+  --app-bg:
+    radial-gradient(circle at 15% -8%, rgba(88, 199, 164, 0.18), transparent 28%),
+    radial-gradient(circle at 85% 2%, rgba(141, 140, 255, 0.16), transparent 26%),
+    #f7faf8;
+  --text: #16201d;
+  --muted: #65716d;
+  --label: #77827e;
+  --placeholder: #9aa5a1;
+  --panel: rgba(255, 255, 255, 0.9);
+  --panel-soft: rgba(248, 251, 249, 0.95);
+  --field: rgba(255, 255, 255, 0.92);
+  --border: rgba(20, 42, 35, 0.12);
+  --border-strong: rgba(20, 42, 35, 0.2);
+  --accent: #168f72;
+  --accent-hover: #0c745c;
+  --accent-contrast: #f6fffb;
+  --danger: #c94f45;
+  --warning: #b47b14;
+  --shadow: 0 18px 45px rgba(35, 52, 45, 0.12);
+}
+
+:root[data-theme="kley"] {
+  --app-bg:
+    radial-gradient(circle at 12% 10%, rgba(255, 0, 132, 0.35), transparent 24%),
+    radial-gradient(circle at 86% 4%, rgba(0, 217, 255, 0.34), transparent 24%),
+    radial-gradient(circle at 50% 110%, rgba(255, 220, 0, 0.26), transparent 30%),
+    linear-gradient(135deg, #280034 0%, #6200b3 22%, #0067ff 43%, #00a85a 60%, #ffb703 78%, #e6005c 100%);
+  --text: #fff8ff;
+  --muted: #f3d9ff;
+  --label: #ffd6fb;
+  --placeholder: #f0b9ff;
+  --panel: rgba(28, 12, 40, 0.72);
+  --panel-soft: rgba(44, 15, 58, 0.72);
+  --field: rgba(255, 255, 255, 0.14);
+  --border: rgba(255, 255, 255, 0.25);
+  --border-strong: rgba(255, 255, 255, 0.42);
+  --accent: #ff4fd8;
+  --accent-hover: #61f4ff;
+  --accent-contrast: #ffffff;
+  --danger: #ff6b6b;
+  --warning: #ffe45e;
+  --shadow: 0 26px 80px rgba(24, 0, 44, 0.38);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--app-bg);
+}
+
+button,
+input,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+}
+
+button {
+  user-select: none;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 34%, transparent);
+}
+
+.app-shell {
+  min-height: 100vh;
+  color: var(--text);
+  background: var(--app-bg);
+  transition:
+    background 180ms ease,
+    color 180ms ease;
+}
+
+.app-header {
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  backdrop-filter: blur(20px);
+}
+
+.brand-icon {
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, transparent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+}
+
+.surface {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(18px);
+}
+
+.surface-soft {
+  border: 1px solid var(--border);
+  background: var(--panel-soft);
+}
+
+.field {
+  color: var(--text);
+  border: 1px solid var(--border);
+  background: var(--field);
+  outline: none;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease,
+    background 150ms ease;
+}
+
+.field:focus,
+.field:focus-within {
+  border-color: color-mix(in srgb, var(--accent) 62%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 14%, transparent);
+}
+
+.field::placeholder {
+  color: var(--placeholder);
+}
+
+.muted-text {
+  color: var(--muted);
+}
+
+.label-text {
+  color: var(--label);
+}
+
+.accent-text {
+  color: var(--accent);
+}
+
+.primary-action {
+  color: var(--accent-contrast);
+  background: var(--accent);
+  transition:
+    transform 140ms ease,
+    filter 140ms ease,
+    background 140ms ease;
+}
+
+.primary-action:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+:root[data-theme="kley"] .primary-action {
+  color: white;
+  background: linear-gradient(90deg, #ff3dad, #904dff, #24d7ff, #34d35c, #ffd447);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.34);
+}
+
+.ghost-action,
+.icon-button,
+.mini-icon-button {
+  color: color-mix(in srgb, var(--text) 74%, var(--muted));
+  border: 1px solid var(--border);
+  background: var(--panel-soft);
+  transition:
+    color 140ms ease,
+    border-color 140ms ease,
+    background 140ms ease,
+    transform 140ms ease;
+}
+
+.ghost-action:hover,
+.icon-button:hover,
+.mini-icon-button:hover {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--panel-soft));
+}
+
+.icon-button-danger:hover,
+.mini-icon-button-danger:hover {
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 42%, transparent);
+  background: color-mix(in srgb, var(--danger) 12%, transparent);
+}
+
+.danger-action {
+  color: color-mix(in srgb, var(--danger) 78%, var(--text));
+  border: 1px solid color-mix(in srgb, var(--danger) 42%, transparent);
+  background: color-mix(in srgb, var(--danger) 12%, transparent);
+  transition:
+    background 140ms ease,
+    transform 140ms ease;
+}
+
+.danger-action:hover {
+  background: color-mix(in srgb, var(--danger) 20%, transparent);
+  transform: translateY(-1px);
+}
+
+.metric-box,
+.soft-box,
+.pill {
+  color: color-mix(in srgb, var(--text) 76%, var(--muted));
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--panel-soft) 84%, transparent);
+}
+
+.assignee-pill {
+  color: color-mix(in srgb, var(--warning) 80%, var(--text));
+  background: color-mix(in srgb, var(--warning) 15%, transparent);
+}
+
+.image-pill {
+  color: color-mix(in srgb, var(--accent) 82%, var(--text));
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+}
+
+.count-pill {
+  color: color-mix(in srgb, var(--text) 74%, var(--muted));
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+}
+
+.kanban-column {
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--panel) 82%, transparent);
+  box-shadow: var(--shadow);
+  transition:
+    border-color 150ms ease,
+    background 150ms ease,
+    box-shadow 150ms ease,
+    transform 150ms ease;
+}
+
+.kanban-column--drop {
+  border-color: color-mix(in srgb, var(--accent) 72%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--panel));
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, var(--accent) 20%, transparent),
+    var(--shadow);
+  transform: translateY(-2px);
+}
+
+.kanban-card {
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--panel-soft) 92%, transparent);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+  transition:
+    opacity 120ms ease,
+    transform 140ms ease,
+    border-color 140ms ease,
+    box-shadow 140ms ease,
+    background 140ms ease;
+}
+
+.kanban-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 36%, transparent);
+  box-shadow:
+    0 16px 35px rgba(0, 0, 0, 0.2),
+    0 0 0 1px color-mix(in srgb, var(--accent) 10%, transparent);
+  transform: translateY(-1px);
+}
+
+.kanban-card--dragging {
+  opacity: 0.24;
+  transform: scale(0.985);
+}
+
+.task-preview {
+  color: var(--text);
+  border: 1px solid color-mix(in srgb, var(--accent) 72%, transparent);
+  background: color-mix(in srgb, var(--panel-soft) 94%, transparent);
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.46),
+    0 0 0 2px color-mix(in srgb, var(--accent) 18%, transparent);
+  backdrop-filter: blur(20px);
+}
+
+.card-drag-icon {
+  color: var(--accent);
+}
+
+.link-title-button {
+  color: var(--text);
+  transition: color 140ms ease;
+}
+
+.link-title-button:hover {
+  color: var(--accent);
+}
+
+.empty-column-button {
+  color: color-mix(in srgb, var(--muted) 82%, transparent);
+  border-color: var(--border-strong);
+  background: color-mix(in srgb, var(--panel-soft) 42%, transparent);
+  transition:
+    color 140ms ease,
+    border-color 140ms ease,
+    background 140ms ease;
+}
+
+.empty-column-button:hover {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 44%, transparent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.dialog-backdrop {
+  background: rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(8px);
+}
+
+:root[data-theme="light"] .dialog-backdrop {
+  background: rgba(10, 25, 20, 0.24);
+}
+
+.image-editor {
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--panel-soft) 72%, transparent);
+}
+
+.file-input {
+  width: min(100%, 320px);
+  color: var(--muted);
+}
+
+.file-input::file-selector-button {
+  margin-right: 12px;
+  color: var(--accent-contrast);
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+  transition:
+    background 140ms ease,
+    transform 140ms ease;
+}
+
+.file-input::file-selector-button:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.file-input:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.image-message {
+  color: color-mix(in srgb, var(--warning) 82%, var(--text));
+}
+
+.image-tile {
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--panel) 86%, transparent);
+}
+
+.image-tile img {
+  display: block;
+  background: color-mix(in srgb, var(--field) 86%, transparent);
+}
+
+.empty-image-box {
+  color: var(--muted);
+  border: 1px dashed var(--border-strong);
+  background: color-mix(in srgb, var(--field) 54%, transparent);
+}
+
+.priority-button,
+.theme-button {
+  color: color-mix(in srgb, var(--text) 68%, var(--muted));
+  border: 1px solid var(--border);
+  background: var(--panel-soft);
+  transition:
+    color 140ms ease,
+    border-color 140ms ease,
+    background 140ms ease,
+    transform 140ms ease,
+    box-shadow 140ms ease;
+}
+
+.priority-button:hover,
+.theme-button:hover {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--accent) 38%, transparent);
+}
+
+.priority-button--active,
+.theme-button--active {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 58%, transparent);
+  background: color-mix(in srgb, var(--accent) 12%, var(--panel-soft));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 11%, transparent);
+}
+
+:root[data-theme="kley"] .theme-button--active {
+  color: white;
+  border-color: rgba(255, 255, 255, 0.72);
+  background:
+    linear-gradient(var(--panel-soft), var(--panel-soft)) padding-box,
+    linear-gradient(90deg, #ff3dad, #904dff, #24d7ff, #34d35c, #ffd447) border-box;
+}
+
+.column-row {
+  border: 1px solid var(--border);
+  background: var(--panel-soft);
+  transition:
+    opacity 140ms ease,
+    transform 140ms ease,
+    border-color 140ms ease,
+    box-shadow 140ms ease,
+    background 140ms ease;
+}
+
+.column-row--dragging {
+  opacity: 0.48;
+}
+
+.column-row--drop {
+  border-color: color-mix(in srgb, var(--accent) 64%, transparent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--panel-soft));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 12%, transparent);
+  transform: translateY(-2px);
+}
+
+.drag-handle {
+  color: var(--muted);
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--field) 86%, transparent);
+  cursor: grab;
+  transition:
+    color 140ms ease,
+    border-color 140ms ease,
+    background 140ms ease,
+    transform 140ms ease;
+}
+
+.drag-handle:hover,
+.drag-handle:focus-visible {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 48%, transparent);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--text) 18%, transparent);
+  border: 2px solid color-mix(in srgb, var(--panel) 92%, transparent);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
